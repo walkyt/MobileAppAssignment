@@ -2,52 +2,109 @@ package com.madevassignment.jkhealth;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
-    private Button calculate;
+    private Button calculate_male;
+    private Button calculate_female;
     private EditText weight_in;
     private EditText height_in;
     private TextView bmi;
     private TextView status;
-    private double bmi_value;
+    private float bmi_value;
+    public float bmi_real;
+    private EditText age_in;
+    private TextView bmr_var;
+    private float bmr_value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        calculate = findViewById(R.id.calculate);
+        calculate_male = findViewById(R.id.calculate_male);
+        calculate_female = findViewById(R.id.calculate_female);
         weight_in = findViewById(R.id.weight_in);
+        age_in = findViewById(R.id.age_in);
         bmi = findViewById(R.id.bmi);
         height_in = findViewById(R.id.height_in);
         status = findViewById(R.id.status);
+        bmr_var = findViewById(R.id.bmr);
 
-        calculate.setOnClickListener(new View.OnClickListener() {
+        calculate_male.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String weight = weight_in.getText().toString();
-                String height = height_in.getText().toString();
+                calculateBMI();
+                calculateBMR_male();
+            }
+        });
 
-                bmi_value = Double.valueOf(weight)/(Math.pow(Double.valueOf(height),2));
-                DecimalFormat formater = new DecimalFormat("#.##");
-                bmi.setText("BMI:"+formater.format(bmi_value));
-                if(bmi_value<18.50){
-
-                    status.setText("You are underweight");
-                }
-//                bmi_value = Double.valueOf(weight)/(Math.pow(Double.valueOf(height),2));
-//                DecimalFormat formater = new DecimalFormat("#.##");
-
-                else if((bmi_value<=18.50)&&(bmi_value<24.90)){
-                    status.setText("You are normal weight");
-                }
-
+        calculate_female.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculateBMI();
+                calculateBMR_female();
             }
         });
     }
 
+    private void calculateBMI(){
+        String weight = weight_in.getText().toString();
+        String height = height_in.getText().toString();
+
+        bmi_value = Float.valueOf(weight)/((Float.valueOf(height))*(Float.valueOf(height)));
+        DecimalFormat formater = new DecimalFormat("#.##");
+        bmi.setText("BMI:"+formater.format(bmi_value));
+        bmi_real = Float.parseFloat(formater.format(bmi_value));
+
+        displayBMI();
+    }
+
+
+    private void displayBMI(){
+        if(Float.compare(bmi_real,18.5f)<=0){
+            status.setText("You are underweight");
+        }
+
+        else if(Float.compare(bmi_real,18.5f)>0&&Float.compare(bmi_real,24.9f)<=0){
+            status.setText("You are normal weight");
+        }
+
+        else if(Float.compare(bmi_real,24.9f)>0&&Float.compare(bmi_real,29.9f)<=0){
+            status.setText("You are Overweight");
+        }
+
+        else if(Float.compare(bmi_real,29.9f)>0){
+            status.setText("You are Obesity");
+        }
+    }
+
+    private void calculateBMR_male(){
+        String weight = weight_in.getText().toString();
+        String height = height_in.getText().toString();
+        String age = age_in.getText().toString();
+        bmr_value = (float) (88.362 + (13.397*Float.valueOf(weight))+(0.04799*Float.valueOf(height))-(5.677* Float.valueOf(age)));
+        DecimalFormat formater = new DecimalFormat("#.##");
+        Log.d("BMR", Float.toString(bmr_value));
+        bmr_var.setText("BMR:"+formater.format(bmr_value));
+
+    }
+
+    private void calculateBMR_female(){
+        String weight = weight_in.getText().toString();
+        String height = height_in.getText().toString();
+        String age = age_in.getText().toString();
+
+        bmr_value = (float) (447.593 + (9.247*Float.valueOf(weight))+(0.03098*Float.valueOf(height))-(4.330* Float.valueOf(age)));
+        DecimalFormat formater = new DecimalFormat("#.##");
+        Log.d("BMR", Float.toString(bmr_value));
+        bmr_var.setText("BMR:");
+
+    }
 }
