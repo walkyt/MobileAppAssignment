@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.DecimalFormat;
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText age_in;
     private TextView bmr_var;
     private float bmr_value;
+    private String weight;
+    private String height;
+    private String age;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,30 +38,50 @@ public class MainActivity extends AppCompatActivity {
         weight_in = findViewById(R.id.weight_in);
         age_in = findViewById(R.id.age_in);
         bmi = findViewById(R.id.bmi);
-        height_in = findViewById(R.id.height_in);
+        height_in = (EditText) findViewById(R.id.height_in);
         status = findViewById(R.id.status);
         bmr_var = findViewById(R.id.bmr);
 
         calculate_male.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calculateBMI();
-                calculateBMR_male();
+                try {
+                    if(weight_in.getText().toString().length()==0){
+                        Toast.makeText(MainActivity.this, "Error: Do npt leave it empty", Toast.LENGTH_SHORT);
+                    }
+                    else {
+                        calculateBMI();
+                        calculateBMR_male();
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+
             }
         });
 
         calculate_female.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calculateBMI();
-                calculateBMR_female();
+
+                try {
+                    if(weight_in.getText().toString().length()==0) {
+                        Toast.makeText(MainActivity.this, "Error: Do npt leave it empty", Toast.LENGTH_SHORT);
+                    }else{
+                        calculateBMI();
+                        calculateBMR_female();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
     private void calculateBMI(){
-        String weight = weight_in.getText().toString();
-        String height = height_in.getText().toString();
+        weight = weight_in.getText().toString();
+        height = height_in.getText().toString();
 
         bmi_value = Float.valueOf(weight)/((Float.valueOf(height))*(Float.valueOf(height)));
         DecimalFormat formater = new DecimalFormat("#.##");
@@ -86,20 +111,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calculateBMR_male(){
-        String weight = weight_in.getText().toString();
-        String height = height_in.getText().toString();
-        String age = age_in.getText().toString();
+        weight = weight_in.getText().toString();
+        height = height_in.getText().toString();
+        age = age_in.getText().toString();
 
         bmr_value = (float) (88.362 + (13.397*Float.valueOf(weight))+(479.9*Float.valueOf(height))-(5.677* Float.valueOf(age)));
         Log.d("abc",Float.toString(bmr_value));
         bmr_var.setText("BMR:"+ Float.toString(bmr_value));
 
     }
-
     private void calculateBMR_female(){
-        String weight = weight_in.getText().toString();
-        String height = height_in.getText().toString();
-        String age = age_in.getText().toString();
+        weight = weight_in.getText().toString();
+        height = height_in.getText().toString();
+        age = age_in.getText().toString();
 
         bmr_value = (float) (447.593 + (9.247*Float.valueOf(weight))+(309.8*Float.valueOf(height))-(4.330* Float.valueOf(age)));
         Log.d("abc",Float.toString(bmr_value));
