@@ -22,7 +22,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="224dp"
+        android:layout_marginBottom="64dp"
         android:text="Button"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         tools:layout_editor_absoluteX="146dp" />
@@ -31,7 +31,7 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="172dp"
+        android:layout_marginBottom="68dp"
         android:text="Button"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         tools:layout_editor_absoluteX="146dp" />
@@ -40,7 +40,7 @@
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="44dp"
         android:text="Button"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         tools:layout_editor_absoluteX="146dp" />
@@ -49,8 +49,7 @@
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="147dp" />
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="574dp" />
 </android.support.constraint.ConstraintLayout>
