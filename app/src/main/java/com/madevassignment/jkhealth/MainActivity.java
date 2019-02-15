@@ -89,10 +89,10 @@ public class MainActivity extends AppCompatActivity {
         String weight = weight_in.getText().toString();
         String height = height_in.getText().toString();
         String age = age_in.getText().toString();
-        bmr_value = (float) (88.362 + (13.397*Float.valueOf(weight))+(0.04799*Float.valueOf(height))-(5.677* Float.valueOf(age)));
-        DecimalFormat formater = new DecimalFormat("#.##");
-        Log.d("BMR", Float.toString(bmr_value));
-        bmr_var.setText("BMR:"+formater.format(bmr_value));
+
+        bmr_value = (float) (88.362 + (13.397*Float.valueOf(weight))+(479.9*Float.valueOf(height))-(5.677* Float.valueOf(age)));
+        Log.d("abc",Float.toString(bmr_value));
+        bmr_var.setText("BMR:"+ Float.toString(bmr_value));
 
     }
 
@@ -101,10 +101,9 @@ public class MainActivity extends AppCompatActivity {
         String height = height_in.getText().toString();
         String age = age_in.getText().toString();
 
-        bmr_value = (float) (447.593 + (9.247*Float.valueOf(weight))+(0.03098*Float.valueOf(height))-(4.330* Float.valueOf(age)));
-        DecimalFormat formater = new DecimalFormat("#.##");
-        Log.d("BMR", Float.toString(bmr_value));
-        bmr_var.setText("BMR:");
+        bmr_value = (float) (447.593 + (9.247*Float.valueOf(weight))+(309.8*Float.valueOf(height))-(4.330* Float.valueOf(age)));
+        Log.d("abc",Float.toString(bmr_value));
+        bmr_var.setText("BMR:"+ Float.toString(bmr_value));
 
     }
 }
