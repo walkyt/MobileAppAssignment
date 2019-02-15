@@ -40,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
         calculate_male.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calculateBMI();
                 calculateBMR_male();
+                calculateBMI();
+
             }
         });
 
@@ -89,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         String weight = weight_in.getText().toString();
         String height = height_in.getText().toString();
         String age = age_in.getText().toString();
+
+        
         bmr_value = (float) (88.362 + (13.397*Float.valueOf(weight))+(0.04799*Float.valueOf(height))-(5.677* Float.valueOf(age)));
         DecimalFormat formater = new DecimalFormat("#.##");
         Log.d("BMR", Float.toString(bmr_value));
