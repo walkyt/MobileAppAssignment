@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.Intent;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -15,6 +16,7 @@ import java.text.DecimalFormat;
 public class MainActivity extends AppCompatActivity {
     private Button calculate_male;
     private Button calculate_female;
+    private Button next_page;
     private EditText weight_in;
     private EditText height_in;
     private TextView bmi;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         height_in = findViewById(R.id.height_in);
         status = findViewById(R.id.status);
         bmr_var = findViewById(R.id.bmr);
+        next_page = findViewById(R.id.next_page);
 
         calculate_male.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 calculateBMI();
                 calculateBMR_female();
+            }
+        });
+
+        next_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent i = new Intent(MainActivity.this, Main2Activity.class);
+                calculateBMR_male();
+               i.putExtra("bmr_value", "hello");
+
+               startActivity(i);
+
             }
         });
     }
