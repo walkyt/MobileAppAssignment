@@ -1,5 +1,6 @@
 package com.madevassignment.jkhealth;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import java.text.DecimalFormat;
 public class MainActivity extends AppCompatActivity {
     private Button calculate_male;
     private Button calculate_female;
+    private Button next_page;
     private EditText weight_in;
     private EditText height_in;
     private TextView bmi;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         height_in = (EditText) findViewById(R.id.height_in);
         status = findViewById(R.id.status);
         bmr_var = findViewById(R.id.bmr);
+        next_page = findViewById(R.id.next_page);
 
         calculate_male.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +78,18 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        next_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, Main2Activity.class);
+                calculateBMR_male();
+                i.putExtra("bmr_value", "hello");
+
+                startActivity(i);
+
             }
         });
     }
