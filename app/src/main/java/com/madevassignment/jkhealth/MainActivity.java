@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, Main2Activity.class);
-                calculateBMR_male();
-                i.putExtra("bmr_value", "hello");
+
+                i.putExtra("bmr_value", Float.toString(bmr_value));
 
                 startActivity(i);
 
@@ -130,9 +130,14 @@ public class MainActivity extends AppCompatActivity {
         height = height_in.getText().toString();
         age = age_in.getText().toString();
 
+
+
         bmr_value = (float) (88.362 + (13.397*Float.valueOf(weight))+(479.9*Float.valueOf(height))-(5.677* Float.valueOf(age)));
         Log.d("abc",Float.toString(bmr_value));
         bmr_var.setText("BMR:"+ Float.toString(bmr_value));
+
+        Intent i = new Intent(MainActivity.this, Main2Activity.class);
+        i.putExtra("bmr_value", bmr_value);
 
     }
     private void calculateBMR_female(){
@@ -140,9 +145,14 @@ public class MainActivity extends AppCompatActivity {
         height = height_in.getText().toString();
         age = age_in.getText().toString();
 
+
+
         bmr_value = (float) (447.593 + (9.247*Float.valueOf(weight))+(309.8*Float.valueOf(height))-(4.330* Float.valueOf(age)));
         Log.d("abc",Float.toString(bmr_value));
         bmr_var.setText("BMR:"+ Float.toString(bmr_value));
+
+        Intent i = new Intent(MainActivity.this, Main2Activity.class);
+        i.putExtra("bmr_value", bmr_value);
 
     }
 }
